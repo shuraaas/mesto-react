@@ -1,6 +1,7 @@
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
         <div className="popup__container">
           <button className="btn btn_type_close" type="button"></button>
           <h2 className="popup__description">Редактировать профиль</h2>
-          <form className="form form_type_edit" name="edit-profile" method="post" action="/">
+          <form className="form form_type_edit" name="edit" method="post" action="/">
             <fieldset className="form__content">
               <label className="form__field">
                 <input className="form__input form__input_type_name" name="name" id="name-input" type="text" placeholder="Имя" minLength="2" maxLength="40" required />
@@ -46,7 +47,7 @@ function App() {
         <div className="popup__container">
           <button className="btn btn_type_close" type="button"></button>
           <h2 className="popup__description">Новое место</h2>
-          <form className="form form_type_add-card" name="new-place" method="post" action="/">
+          <form className="form form_type_add-card" name="new-card" method="post" action="/">
             <fieldset className="form__content">
               <label className="form__field">
                 <input className="form__input form__input_type_place-name" name="place-name" id="place-name-input" type="text" placeholder="Название" minLength="2" maxLength="30" required />
@@ -68,15 +69,6 @@ function App() {
           <p className="popup__img-name"></p>
         </div>
       </div>
-      <div className="popup popup_type_delete-card">
-        <div className="popup__container">
-          <button className="btn btn_type_close" type="button"></button>
-          <form className="form form_type_confirm" name="confirm" method="post" action="/">
-            <h2 className="popup__description">Вы уверены?</h2>
-            <button className="btn btn_type_save" type="submit">Да</button>
-          </form>
-        </div>
-      </div>
       <div className="popup popup_type_edit-avatar">
         <div className="popup__container">
           <button className="btn btn_type_close" type="button"></button>
@@ -92,6 +84,21 @@ function App() {
           </form>
         </div>
       </div>
+      <div className="popup popup_type_delete-card">
+        <div className="popup__container">
+          <button className="btn btn_type_close" type="button"></button>
+          <form className="form form_type_confirm" name="delete-card" method="post" action="/">
+            <h2 className="popup__description">Вы уверены?</h2>
+            <button className="btn btn_type_save" type="submit">Да</button>
+          </form>
+        </div>
+      </div>
+
+      <PopupWithForm title="Редактировать профиль" name="edit" children="edit"/>
+      <PopupWithForm title="Новое место" name="new-card" children="new-card"/>
+      <PopupWithForm title="Обновить аватар" name="edit-avatar" children="edit-avatar"/>
+      <PopupWithForm title="Вы уверены?" name="delete-card" children="delete-card"/>
+
     </div>
   );
 }
