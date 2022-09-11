@@ -2,6 +2,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 function App() {
   return (
@@ -62,13 +63,18 @@ function App() {
           </form>
         </div>
       </div>
-      <div className="popup popup_type_zoom-img">
+
+
+      <ImagePopup />
+      {/* <div className="popup popup_type_zoom-img">
         <div className="popup__img-container">
           <button className="btn btn_type_close" type="button"></button>
           <img className="popup__img" src="#" alt="/" />
           <p className="popup__img-name"></p>
         </div>
-      </div>
+      </div> */}
+
+      
       <div className="popup popup_type_edit-avatar">
         <div className="popup__container">
           <button className="btn btn_type_close" type="button"></button>
