@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from 'react';
+// import ReactDOM from 'react-dom/client';
+
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -5,12 +8,38 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
+
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
+
+
+  function handleEditAvatarClick() {
+    // document.querySelector('.popup_type_edit-avatar').classList.add('popup_opened');
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function handleEditProfileClick() {
+    // document.querySelector('.popup_type_edit').classList.add('popup_opened');
+    setIsEditProfilePopupOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    // document.querySelector('.popup_type_new-card').classList.add('popup_opened');
+    setIsAddPlacePopupOpen(true);
+  }
+
   return (
     <div className="page">
       <div className="page__container">
 
         <Header />
-        <Main />
+        <Main
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+        />
         <Footer />
 
       </div>
@@ -74,7 +103,7 @@ function App() {
         </div>
       </div> */}
 
-      
+
       <div className="popup popup_type_edit-avatar">
         <div className="popup__container">
           <button className="btn btn_type_close" type="button"></button>
@@ -100,10 +129,30 @@ function App() {
         </div>
       </div>
 
-      <PopupWithForm title="Редактировать профиль" name="edit" children="edit"/>
-      <PopupWithForm title="Новое место" name="new-card" children="new-card"/>
-      <PopupWithForm title="Обновить аватар" name="edit-avatar" children="edit-avatar"/>
-      <PopupWithForm title="Вы уверены?" name="delete-card" children="delete-card"/>
+      <PopupWithForm
+        title="Редактировать профиль"
+        name="edit"
+        children="edit"
+        isOpen={isEditProfilePopupOpen}
+      />
+      <PopupWithForm
+        title="Новое место"
+        name="new-card"
+        children="new-card"
+        isOpen={isAddPlacePopupOpen}
+      />
+      <PopupWithForm
+        title="Обновить аватар"
+        name="edit-avatar"
+        children="edit-avatar"
+        isOpen={isEditAvatarPopupOpen}
+      />
+      <PopupWithForm
+        title="Вы уверены?"
+        name="delete-card"
+        children="delete-card"
+        isOpen=""
+      />
 
     </div>
   );
