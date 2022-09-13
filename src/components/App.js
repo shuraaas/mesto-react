@@ -13,20 +13,15 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 
-
-
   function handleEditAvatarClick() {
-    // document.querySelector('.popup_type_edit-avatar').classList.add('popup_opened');
     setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    // document.querySelector('.popup_type_edit').classList.add('popup_opened');
     setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    // document.querySelector('.popup_type_new-card').classList.add('popup_opened');
     setIsAddPlacePopupOpen(true);
   }
 
