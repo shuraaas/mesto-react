@@ -30,6 +30,12 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
+
   return (
     <div className="page">
       <div className="page__container">
@@ -134,24 +140,28 @@ function App() {
         name="edit"
         children="edit"
         isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
       />
       <PopupWithForm
         title="Новое место"
         name="new-card"
         children="new-card"
         isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
       />
       <PopupWithForm
         title="Обновить аватар"
         name="edit-avatar"
         children="edit-avatar"
         isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
       />
       <PopupWithForm
         title="Вы уверены?"
         name="delete-card"
         children="delete-card"
         isOpen=""
+        onClose={closeAllPopups}
       />
 
     </div>
