@@ -44,7 +44,7 @@ function App() {
         <Footer />
 
       </div>
-      
+
       <div className="popup popup_type_edit">
         <div className="popup__container">
           <button className="btn btn_type_close" type="button"></button>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from '../utils/api';
+import Card from './Card';
 
 function Main(props) {
 
@@ -24,7 +25,6 @@ function Main(props) {
           link: card.link
         }));
         setCards(result);
-        console.log(result)
       })
     }, []);
 
@@ -48,17 +48,7 @@ function Main(props) {
       {cards ? (
         <section className="cards">
           <ul className="cards__list">
-            {cards.map(card =>
-              <li className="card">
-                <button className="btn btn_type_delete" type="button"></button>
-                <img className="card__img" src={card.link} alt={card.name} />
-                <div className="card__description">
-                  <h2 className="card__place">{card.name}</h2>
-                  <button className="btn btn_type_like" type="button"></button>
-                  <p className="card__like-counter">{card.likes.length}</p>
-                </div>
-              </li>
-            )}
+            {cards.map(card => <Card key={card.id} {...card}/>)}
           </ul>
         </section>
       ) : null}
