@@ -9,14 +9,15 @@ function PopupWithForm(props) {
         <button className="btn btn_type_close" type="button" onClick={props.onClose}></button>
         <h2 className="popup__description">{props.title}</h2>
         <form className="form form_type_edit" name={props.name} method="post" action="/">
-          <fieldset className="form__content">
-            <label className="form__field">
-
-              <p>{props.children}</p>
-
-            </label>
-          </fieldset>
-          <button  className="btn btn_type_save" type="submit">Сохранить</button>
+          {props.children}
+          <button className="btn btn_type_save" type="submit">
+            {props.name === 'delete-card'
+              ? 'Да'
+              : props.name === 'new-card'
+              ? 'Создать'
+              : 'Сохранить'
+            }
+          </button>
         </form>
       </div>
     </div>
