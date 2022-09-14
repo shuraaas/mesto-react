@@ -22,7 +22,7 @@ function Main(props) {
           id: card._id,
           name: card.name,
           likes: card.likes,
-          link: card.link
+          link: card.link,
         }));
         setCards(result);
       })
@@ -48,7 +48,13 @@ function Main(props) {
       {cards ? (
         <section className="cards">
           <ul className="cards__list">
-            {cards.map(card => <Card key={card.id} {...card}/>)}
+            {cards.map(card =>
+              <Card
+                key={card.id}
+                onCardClick={props.onCardClick}
+                {...card}
+              />
+            )}
           </ul>
         </section>
       ) : null}

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import ReactDOM from 'react-dom/client';
-
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -12,6 +11,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -25,24 +25,28 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
+  function handleCardClick(name, link) {
+    setSelectedCard({ name, link });
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setSelectedCard(null);
   }
 
   return (
     <div className="page">
       <div className="page__container">
-
         <Header />
         <Main
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
-
       </div>
 
       <div className="popup popup_type_edit">
@@ -83,18 +87,6 @@ function App() {
           </form>
         </div>
       </div>
-
-
-      <ImagePopup />
-      {/* <div className="popup popup_type_zoom-img">
-        <div className="popup__img-container">
-          <button className="btn btn_type_close" type="button"></button>
-          <img className="popup__img" src="#" alt="/" />
-          <p className="popup__img-name"></p>
-        </div>
-      </div> */}
-
-
       <div className="popup popup_type_edit-avatar">
         <div className="popup__container">
           <button className="btn btn_type_close" type="button"></button>
@@ -120,6 +112,7 @@ function App() {
         </div>
       </div>
 
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       <PopupWithForm
         title="Редактировать профиль"
         name="edit"
