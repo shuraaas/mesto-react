@@ -44,17 +44,7 @@ function App() {
         <Footer />
 
       </div>
-      <template className="card-template">
-        <li className="card">
-          <button className="btn btn_type_delete" type="button"></button>
-          <img className="card__img" src="#" alt="/" />
-          <div className="card__description">
-            <h2 className="card__place"></h2>
-            <button className="btn btn_type_like" type="button"></button>
-            <p className="card__like-counter"></p>
-          </div>
-        </li>
-      </template>
+      
       <div className="popup popup_type_edit">
         <div className="popup__container">
           <button className="btn btn_type_close" type="button"></button>

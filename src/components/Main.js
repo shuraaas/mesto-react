@@ -6,6 +6,7 @@ function Main(props) {
   const [userName, setUserName] = useState();
   const [userDescription, setUserDescription] = useState();
   const [userAvatar, setUserAvatar] = useState();
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api.getUserInfo()
@@ -14,7 +15,18 @@ function Main(props) {
         setUserDescription(data.about);
         setUserAvatar(data.avatar);
       });
-  }, []);
+    api.getInitialCards()
+      .then(cards => {
+        const result = cards.map(card => ({
+          id: card._id,
+          name: card.name,
+          likes: card.likes,
+          link: card.link
+        }));
+        setCards(result);
+        console.log(result)
+      })
+    }, []);
 
   return (
     <main className="content">
@@ -32,9 +44,24 @@ function Main(props) {
         </div>
         <button className="btn btn_type_add" onClick={props.onAddPlace} type="button"></button>
       </section>
-      <section className="cards">
-        <ul className="cards__list"></ul>
-      </section>
+
+      {cards ? (
+        <section className="cards">
+          <ul className="cards__list">
+            {cards.map(card =>
+              <li className="card">
+                <button className="btn btn_type_delete" type="button"></button>
+                <img className="card__img" src={card.link} alt={card.name} />
+                <div className="card__description">
+                  <h2 className="card__place">{card.name}</h2>
+                  <button className="btn btn_type_like" type="button"></button>
+                  <p className="card__like-counter">{card.likes.length}</p>
+                </div>
+              </li>
+            )}
+          </ul>
+        </section>
+      ) : null}
     </main>
   );
 }
