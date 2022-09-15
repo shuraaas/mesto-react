@@ -50,13 +50,13 @@ function Main(props) {
       {cards ? (
         <section className="cards">
           <ul className="cards__list">
-            {cards.map(card =>
+            {cards.map(card => (
               <Card
                 key={card.id}
                 onCardClick={props.onCardClick}
                 {...card}
               />
-            )}
+            ))}
           </ul>
         </section>
       ) : null}
