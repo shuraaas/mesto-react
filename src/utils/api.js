@@ -8,7 +8,7 @@ class Api {
     };
   }
 
-  // проверяем рузультат запроса
+  // проверяем результат запроса
   _checkResult = (res) => {
     if (res.ok) {
       return res.json();
@@ -18,75 +18,73 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  // универсальный запрос
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResult);
+  }
+
   // запрашиваем инфу о пользователе с сервера (аватар, имя, описание)
   getUserInfo() {
-    return fetch(`${this._url}users/me`, {
-        headers: this._headers
-      })
-      .then(this._checkResult);
+    return this._request(`${this._url}users/me`, {
+      headers: this._headers
+    });
   }
 
   //  сохраняем отредактированные данные профиля на сервере
   setUserInfo(userData) {
-    return fetch(`${this._url}users/me`, {
+    return this._request(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: userData.name,
         about: userData.job
       })
-    })
-    .then(this._checkResult);
+    });
   }
 
   // запрашиваем начальные карточки с сервера
   getInitialCards() {
-    return fetch(`${this._url}cards`, {
+    return this._request(`${this._url}cards`, {
         headers: this._headers
-      })
-      .then(this._checkResult);
+      });
   }
 
   // загружаем новую карточку на сервер
   setNewCard({ name, link }) {
-    return fetch(`${this._url}cards`, {
+    return this._request(`${this._url}cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
         name,
         link
       })
-    })
-    .then(this._checkResult);
+    });
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._url}cards/${cardId}`, {
+    return this._request(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
-    })
-    .then(this._checkResult);
+    });
   }
 
   // ставим лайк
   likeCard(cardId, status) {
-    return fetch(`${this._url}cards/${cardId}/likes`, {
+    return this._request(`${this._url}cards/${cardId}/likes`, {
       method: status ? 'DELETE' : 'PUT',
       headers: this._headers
-    })
-    .then(this._checkResult);
+    });
   }
 
   // загружаем новый аватар на сервер
   changeAvatar(data) {
-    return fetch(`${this._url}/users/me/avatar`, {
+    return this._request(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar
       })
-    })
-    .then(this._checkResult);
+    });
   }
 }
 const apiConfig = {
