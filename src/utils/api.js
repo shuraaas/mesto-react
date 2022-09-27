@@ -78,7 +78,7 @@ class Api {
 
   // загружаем новый аватар на сервер
   changeAvatar(data) {
-    return this._request(`${this._url}/users/me/avatar`, {
+    return this._request(`${this._url}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
