@@ -17,14 +17,15 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const promiseUserInfo = api.getUserInfo();
+  const promiseInitialCards = api.getInitialCards();
 
   useEffect(() => {
-    api.getUserInfo()
-      .then(data => setCurrentUser(data))
-      .catch(err => console.error(err));
-
-    api.getInitialCards()
-      .then(cards => setCards(cards))
+    Promise.all([promiseUserInfo, promiseInitialCards])
+      .then(([userData, cards]) => {
+        setCurrentUser(userData);
+        setCards(cards);
+      })
       .catch(err => console.error(err));
   }, []);
 
