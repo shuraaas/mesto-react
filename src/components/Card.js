@@ -41,7 +41,7 @@ function Card({
         <h2 className="card__place">{name}</h2>
         <button className={cardLikeButtonClassName} type="button" onClick={handleLikeClick}></button>
         <p className="card__like-counter">
-          {likes.length > 0 ? likes.length : null}
+          {likes.length}
         </p>
       </div>
     </li>
