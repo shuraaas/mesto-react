@@ -1,23 +1,28 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  const nameRef = useRef();
-  const jobRef = useRef();
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
-    nameRef.current.value = currentUser.name;
-    jobRef.current.value = currentUser.about;
-  }, [currentUser, nameRef, jobRef])
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
 
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateUser({
-      name: nameRef.current.value,
-      job: jobRef.current.value
+      name,
+      job: description
     });
+  }
+
+  function handleChange(e) {
+    if (e.target.name === 'name') setName(e.target.value);
+    if (e.target.name === 'job') setDescription(e.target.value);
   }
 
   return (
@@ -34,12 +39,13 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           <input
             className="form__input form__input_type_name"
             name="name"
-            ref={nameRef}
+            value={name || ''}
             id="name-input"
             type="text"
             placeholder="Имя"
             minLength="2"
             maxLength="40"
+            onChange={handleChange}
             required
           />
           <span className="form__input-error name-input-error"></span>
@@ -48,12 +54,13 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           <input
             className="form__input form__input_type_job"
             name="job"
-            ref={jobRef}
+            value={description || ''}
             id="job-input"
             type="text"
             placeholder="О себе"
             minLength="2"
             maxLength="200"
+            onChange={handleChange}
             required
           />
           <span className="form__input-error job-input-error"></span>
