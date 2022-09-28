@@ -12,14 +12,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     jobRef.current.value = currentUser.about;
   }, [currentUser, nameRef, jobRef])
 
-  // function handleChange(e) {
-  //   if (e.target.name === 'name') nameRef.current.value = e.target.value;
-  //   if (e.target.name === 'job') jobRef.current.value = e.target.value;
-  // }
-
   function handleSubmit(e) {
     e.preventDefault();
-
     onUpdateUser({
       name: nameRef.current.value,
       job: jobRef.current.value
@@ -46,7 +40,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             placeholder="Имя"
             minLength="2"
             maxLength="40"
-            // onChange={handleChange}
             required
           />
           <span className="form__input-error name-input-error"></span>
@@ -61,7 +54,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             placeholder="О себе"
             minLength="2"
             maxLength="200"
-            // onChange={handleChange}
             required
           />
           <span className="form__input-error job-input-error"></span>

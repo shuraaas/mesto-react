@@ -2,18 +2,15 @@ import React, { useRef } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddCardPopup({ isOpen, onClose, onAddCard }) {
-
   const nameRef = useRef();
   const linkRef = useRef();
 
   function handleSubmit(e) {
     e.preventDefault();
-
     onAddCard({
       name: nameRef.current.value,
       link: linkRef.current.value
     });
-
     nameRef.current.value = '';
     linkRef.current.value = '';
   }
