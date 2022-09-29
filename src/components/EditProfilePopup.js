@@ -10,7 +10,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,9 +20,12 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     });
   }
 
-  function handleChange(e) {
-    if (e.target.name === 'name') setName(e.target.value);
-    if (e.target.name === 'job') setDescription(e.target.value);
+  function handleChangeName(e) {
+    setName(e.target.value);
+  }
+
+  function handleChangeDescription(e) {
+    setDescription(e.target.value);
   }
 
   return (
@@ -45,7 +48,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             placeholder="Имя"
             minLength="2"
             maxLength="40"
-            onChange={handleChange}
+            onChange={handleChangeName}
             required
           />
           <span className="form__input-error name-input-error"></span>
@@ -60,7 +63,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             placeholder="О себе"
             minLength="2"
             maxLength="200"
-            onChange={handleChange}
+            onChange={handleChangeDescription}
             required
           />
           <span className="form__input-error job-input-error"></span>
