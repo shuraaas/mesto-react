@@ -1,6 +1,6 @@
 import React from "react";
 
-function ImagePopup({ card, onClose }) {
+const ImagePopup = ({ card, onClose }) => {
   return (
     <div className={card
       ? `popup popup_type_zoom-img popup_opened`
@@ -15,6 +15,6 @@ function ImagePopup({ card, onClose }) {
       ) : null}
     </div>
   );
-}
+};
 
 export default ImagePopup;

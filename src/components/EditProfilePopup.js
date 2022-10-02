@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -12,21 +12,21 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     setDescription(currentUser.about);
   }, [currentUser, isOpen]);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateUser({
       name,
       job: description
     });
-  }
+  };
 
-  function handleChangeName(e) {
+  const handleChangeName = (e) => {
     setName(e.target.value);
-  }
+  };
 
-  function handleChangeDescription(e) {
+  const handleChangeDescription = (e) => {
     setDescription(e.target.value);
-  }
+  };
 
   return (
     <PopupWithForm
@@ -71,6 +71,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       </fieldset>
     </PopupWithForm>
   );
-}
+};
 
 export default EditProfilePopup;

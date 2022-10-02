@@ -1,16 +1,16 @@
 import React, { useRef } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
   const inputRef = useRef();
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateAvatar({
       avatar: inputRef.current.value
     });
     inputRef.current.value = '';
-  }
+  };
 
   return (
     <PopupWithForm
@@ -37,6 +37,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       </fieldset>
     </PopupWithForm>
   );
-}
+};
 
 export default EditAvatarPopup;

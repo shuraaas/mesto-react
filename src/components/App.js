@@ -10,7 +10,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function App() {
+const App = () => {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -29,57 +29,57 @@ function App() {
       .catch(err => console.error(err));
   }, []);
 
-  function handleEditAvatarClick() {
+  const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
-  }
+  };
 
-  function handleEditProfileClick() {
+  const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(true);
-  }
+  };
 
-  function handleAddPlaceClick() {
+  const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
-  }
+  };
 
-  function handleCardClick(name, link) {
+  const handleCardClick = (name, link) => {
     setSelectedCard({ name, link });
-  }
+  };
 
-  function closeAllPopups() {
+  const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
-  }
+  };
 
-  function handleUpdateUser(data) {
+  const handleUpdateUser = (data) => {
     api.setUserInfo(data)
       .then((user) => {
         setCurrentUser(user);
         closeAllPopups();
       })
       .catch(err => console.error(err));
-  }
+  };
 
-  function handleUpdateAvatar(avatar) {
+  const handleUpdateAvatar = (avatar) => {
     api.changeAvatar(avatar)
       .then((user) => {
         setCurrentUser(user);
         closeAllPopups();
       })
       .catch(err => console.error(err));
-  }
+  };
 
-  function handleAddCardSubmit(data) {
+  const handleAddCardSubmit = (data) => {
     api.setNewCard(data)
     .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
       .catch(err => console.error(err));
-  }
+  };
 
-  function handleCardLike({ _id, likes }) {
+  const handleCardLike = ({ _id, likes }) => {
     const isLiked = likes.some(item => item._id === currentUser._id);
 
     api.likeCard(_id, isLiked)
@@ -87,15 +87,15 @@ function App() {
         setCards((state) => state.map((c) => c._id === _id ? newCard : c));
       })
       .catch(err => console.error(err));
-  }
+  };
 
-  function handleCardDelete(cardId) {
+  const handleCardDelete = (cardId) => {
     api.deleteCard(cardId)
       .then(() => {
         setCards((state) => state.filter(item => item._id !== cardId));
       })
       .catch(err => console.error(err));
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -144,6 +144,6 @@ function App() {
       </div>
     </CurrentUserContext.Provider>
   );
-}
+};
 
 export default App;

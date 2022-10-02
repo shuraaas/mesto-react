@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddCardPopup({ isOpen, onClose, onAddCard }) {
+const AddCardPopup = ({ isOpen, onClose, onAddCard }) => {
   const nameRef = useRef();
   const linkRef = useRef();
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onAddCard({
       name: nameRef.current.value,
@@ -13,7 +13,7 @@ function AddCardPopup({ isOpen, onClose, onAddCard }) {
     });
     nameRef.current.value = '';
     linkRef.current.value = '';
-  }
+  };
 
   return (
     <PopupWithForm
@@ -54,6 +54,6 @@ function AddCardPopup({ isOpen, onClose, onAddCard }) {
       </fieldset>
     </PopupWithForm>
   );
-}
+};
 
 export default AddCardPopup;
